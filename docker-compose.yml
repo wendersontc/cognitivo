@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:10.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 1000:5432
+  app:
+    build: ./app-cognitivo    
+    volumes:
+      - ./app-cognitivo:/usr/src/app
+    ports:
+      - 9090:80
+    depends_on:
+      - db
+volumes:
+  postgres_data:
